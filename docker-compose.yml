@@ -1,17 +1,38 @@
 version: '3'
 services:
-    # remindme-backend:
-    #     container_name: remindme-backend
-    #     build:
-    #         context: backend
-    #         dockerfile: Dockerfile
-    #     environment:
-    #         NODE_ENV: development
-    #         PORT: 4000
-    #     ports:
-    #         - '4000:4000'
-    #     depends_on:
-    #         - postgres
+    remindme-backend:
+        container_name: remindme-backend
+        build:
+            context: backend
+            dockerfile: Dockerfile
+        environment:
+            NODE_ENV: development
+            PORT: 4000
+            WAIT_HOSTS: postgres:5432
+            WAIT_HOSTS_TIMEOUT: 300
+            WAIT_SLEEP_INTERVAL: 30
+            WAIT_HOST_CONNECT_TIMEOUT: 30
+        ports:
+            - '4000:4000'
+        depends_on:
+            - postgres
+    remindme-frontend:
+        container_name: remindme-frontend
+        build:
+            context: frontend
+            dockerfile: Dockerfile
+        environment:
+            NODE_ENV: production
+            PORT: 3000
+            WAIT_HOSTS: postgres:5432
+            WAIT_HOSTS_TIMEOUT: 300
+            WAIT_SLEEP_INTERVAL: 30
+            WAIT_HOST_CONNECT_TIMEOUT: 30
+        ports:
+            - '3000:3000'
+        depends_on:
+            - postgres
+            - remindme-backend
     postgres:
         container_name: postgres
         image: postgres:10.4
