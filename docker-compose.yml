@@ -10,7 +10,7 @@ services:
             PORT: 4000
             WAIT_HOSTS: postgres:5432
             WAIT_HOSTS_TIMEOUT: 300
-            WAIT_SLEEP_INTERVAL: 30
+            WAIT_SLEEP_INTERVAL: 7
             WAIT_HOST_CONNECT_TIMEOUT: 30
         ports:
             - '4000:4000'
@@ -26,7 +26,7 @@ services:
             PORT: 3000
             WAIT_HOSTS: postgres:5432
             WAIT_HOSTS_TIMEOUT: 300
-            WAIT_SLEEP_INTERVAL: 30
+            WAIT_SLEEP_INTERVAL: 7
             WAIT_HOST_CONNECT_TIMEOUT: 30
         ports:
             - '3000:3000'
